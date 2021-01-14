@@ -42,9 +42,9 @@ describe('TronWeb ztron', function() {
         // deploy shieldedTRC20 contract
         console.log("000")
         trc20ContractAddress = await publicMethod.deployContract(trc20Contract,[ADDRESS_BASE58]);
-        console.log("111")
+        console.log("trc20ContractAddress:"+trc20ContractAddress)
         shieldedTRC20ContractAddress = await publicMethod.deployContract(shieldContract,[trc20ContractAddress,1]);
-        console.log("222")
+        console.log("shieldedTRC20ContractAddress:"+shieldedTRC20ContractAddress)
 
         methodInstance = shieldedUtils.makeShieldedMethodInstance(tronWeb, shieldedTRC20ContractAddress);
         shieldedInfo = await tronWeb.ztron.getNewShieldedAddress();
@@ -292,6 +292,7 @@ describe('TronWeb ztron', function() {
         describe("#createMintParams", function (){
             it('should get mintParams with ovk is object', async function (){
                 const startBlockInfo = await tronWeb.trx.getCurrentBlock()
+                console.log("startBlockIndex:"+startBlockInfo.block_header.raw_data.number)
 
                 // createMintParams
                 for(let i = 0; i < 1; i++){
@@ -313,8 +314,9 @@ describe('TronWeb ztron', function() {
                     assert.ok(result);
                     console.log("result: "+util.inspect(result))
                     assert.ok(result.trigger_contract_input);
+                    console.log("!!!result.trigger_contract_input: "+util.inspect(result.trigger_contract_input))
 
-                    const address = tronWeb.defaultAddress.base58;
+                    /*const address = tronWeb.defaultAddress.base58;
                     //approve
                     await shieldedUtils.makeAndSendTransaction(tronWeb, trc20ContractAddress, 'approve(address,uint256)', {},
                         [{type: 'address', value: shieldedTRC20ContractAddress},{type: 'uint256', value: narrowValue * scalingFactor}], address)
@@ -336,10 +338,10 @@ describe('TronWeb ztron', function() {
                             // console.log("createInfo:"+util.inspect(createInfo))
                             break;
                         }
-                    }
+                    }*/
 
                 }
-                startBlockIndex = startBlockInfo.block_header.raw_data.number;
+                /*startBlockIndex = startBlockInfo.block_header.raw_data.number;
                 endBlockIndex = startBlockIndex + 90;
 
                 const params = {
@@ -362,7 +364,7 @@ describe('TronWeb ztron', function() {
                 console.log("noteTxs: "+util.inspect(noteTxs));
                 assert.equal(shieldedInfo.payment_address, noteTxs[0].note.payment_address);
                 assert.equal(narrowValue, noteTxs[0].note.value);
-                assert.equal(createTxId, noteTxs[0].txid);
+                assert.equal(createTxId, noteTxs[0].txid);*/
             })
 
             it('should get mintParams with Expanded parameters', async function(){

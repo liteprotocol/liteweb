@@ -29,9 +29,12 @@ const createInstanceSide = (extraOptions = {}, sideExtraOptions = {}) => {
 
 const createInstance = (extraOptions = {}) => {
     let options = Object.assign({
-        fullHost: FULL_NODE_API,
-        solidityNode: SOLIDITY_NODE_API,
-        eventServer: EVENT_API,
+        // fullHost: FULL_NODE_API,
+        // solidityNode: SOLIDITY_NODE_API,
+        // eventServer: EVENT_API,
+        fullNode: SIDE_CHAIN.fullNode,
+        solidityNode: SIDE_CHAIN.solidityNode,
+        eventServer: SIDE_CHAIN.eventServer,
         privateKey: PRIVATE_KEY,
     }, extraOptions)
     return new TronWeb(options);
